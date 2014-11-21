@@ -1,38 +1,37 @@
 package com.shirashiki.javatest;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import java.util.*;
+
+import org.junit.Test;
+
+
+
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+public class AppTest {
+	
+	@Test
+	public void testAddOperation() throws Exception{
+		Operation op = new AddOperation();
+		String expected = "15.12";
+		
+		ArrayList<String> argList = new ArrayList<String>();
+		argList.add("opAdd");
+		argList.add("chocolate");
+		argList.add("0.1");
+		argList.add("13");
+		argList.add("2.02");
+		argList.add("banana");
+		argList.add("apple");
+		
+		String[] argArray = new String[argList.size()];
+		argArray = argList.toArray(argArray);
+		
+		String received = op.getResult(argArray);
+		
+		assertEquals(expected, received);
+	}
 }
