@@ -1,4 +1,4 @@
-package com.shirashiki.javatest;
+package com.shirashiki.javatest.bo;
 
 import java.util.*;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -6,20 +6,16 @@ import org.apache.commons.lang3.math.NumberUtils;
 /**
  * Implements the Add operation: 
  * add numbers. Adds any argument that is numeric. Ignores non numeric arguments.
+ * @see com.shirashiki.javatest.bo.OperationFactory
  * @author silviohirashiki
  *
  */
 public class AddOperation implements Operation {
 
-	public String getResult(String[] args) {
+	public String getResult(List<String> argList) {
 		
 		double result = 0d;
-		
-		List<String> argList = new ArrayList<String>(Arrays.asList(args));
-		
-		// removes first element which contains operation
-		argList.remove(0);
-		
+	
 	    for (String s : argList) {
 	    	
 	    	// when element is numeric, accumulates values
@@ -27,8 +23,7 @@ public class AddOperation implements Operation {
 	        	result = result + Double.parseDouble(s);
 	        }
 	    }
-		
-		
+				
 		return String.valueOf(result);
 	}
 

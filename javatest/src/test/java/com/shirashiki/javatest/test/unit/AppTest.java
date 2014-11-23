@@ -1,9 +1,9 @@
-package com.shirashiki.javatest;
+package com.shirashiki.javatest.test.unit;
 
 import static org.junit.Assert.assertEquals;
 import java.util.*;
-
 import org.junit.Test;
+import com.shirashiki.javatest.bo.*;
 
 
 
@@ -15,7 +15,7 @@ public class AppTest {
 	
 	@Test
 	public void testAddOperation() throws Exception{
-		Operation op = new AddOperation();
+		Operation op = OperationFactory.createOperation("opAdd");
 		String expected = "15.12";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -26,11 +26,8 @@ public class AppTest {
 		argList.add("2.02");
 		argList.add("banana");
 		argList.add("apple");
-		
-		String[] argArray = new String[argList.size()];
-		argArray = argList.toArray(argArray);
-		
-		String received = op.getResult(argArray);
+
+		String received = op.getResult(argList);
 		
 		assertEquals(expected, received);
 	}

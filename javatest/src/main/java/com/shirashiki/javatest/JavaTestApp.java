@@ -1,5 +1,11 @@
 package com.shirashiki.javatest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.shirashiki.javatest.bo.*;
+
 /**
  * 
  * Write a Java command line program that takes a list of arguments as follows:
@@ -28,28 +34,25 @@ public class JavaTestApp
 	 */
     public static void main( String[] args )
     {
-    
-    	/*
-    	for (int i= 0; i < args.length; i++){
-    		
-    		System.out.println(args[i]);
-    	}
-    	*/
-    	
+    	// cannot have empty argument
     	if (args.length < 1){
     		throw new IllegalArgumentException("empty argument");
     	}
     	
-    	String operationName = args[0].trim();
+		List<String> argList = new ArrayList<String>(Arrays.asList(args));
+    	String operationName = argList.get(0);
     	
-    	Operation op;
+		// removes first element which contains operation
+		argList.remove(0);    	
+ 
+		// Creates the object which will perform the operation
+    	Operation op = OperationFactory.createOperation(operationName);
+    	   	
+    	// Executes the operation and prints result in the console
     	String opResult = "";
-    	if (operationName.equals("opAdd")) {
-    		op = new AddOperation();
-    		opResult = op.getResult(args);
-    	}
+    	opResult = op.getResult(argList);
     	
-    	System.out.println(operationName + "=[" + opResult + "]");
+    	System.out.println(opResult);
     	
     }
 }
