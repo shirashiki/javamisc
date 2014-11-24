@@ -9,8 +9,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.shirashiki.javatest.*;
+import com.shirashiki.javatest.JavaTestApp;
 
+
+/**
+ * Runs integration tests, simulating a user operating JavaTestApp from the console 
+ * @author silvio hirashiki
+ *
+ */
 public class IntegrationTest {
 
 	private static final String EOL = System.getProperty("line.separator");
@@ -32,7 +38,7 @@ public class IntegrationTest {
 	@Test
 	public void testAddOperation() throws Exception {
 
-		JavaTestApp.main(new String[] { "opAdd", "1", "2" });
-		assertEquals("3.0" + EOL, bytes.toString());
+		JavaTestApp.main(new String[] { "opAdd", "1.1", "2","chocolate","employee(John,Smith,33000)"});
+		assertEquals("3.1" + EOL, bytes.toString());
 	}
 }

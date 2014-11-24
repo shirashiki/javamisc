@@ -5,7 +5,7 @@ package com.shirashiki.javatest.model;
  * @author silviohirashiki
  *
  */
-public class Employee {
+public class Employee implements Comparable<Employee> {
 	private String firstName;
 	private String lastName;
 	private double salary;
@@ -80,6 +80,10 @@ public class Employee {
 				.doubleToLongBits(other.salary))
 			return false;
 		return true;
+	}
+
+	public int compareTo(Employee emp) {
+		return lastName.compareTo(emp.getLastName());
 	}
 
 	
