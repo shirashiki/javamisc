@@ -140,8 +140,8 @@ public class AppTest {
 		expectedList.add("7");
 		expectedList.add("11");
 		expectedList.add("20");
-		expectedList.add("Apple");
 		expectedList.add("employee(Susan,Ames,22001.23)");
+		expectedList.add("Apple");
 		expectedList.add("employee(Melvin,Barnes,11000.12)");
 		expectedList.add("Cardamon");
 		expectedList.add("employee(John,Smith,22000.01)");
@@ -181,6 +181,70 @@ public class AppTest {
 		assertEquals(expected, received);
 	}
 	
+	/**
+	 * Tests Sort Operation: test with numbers, strings and employees
+	 * @throws Exception
+	 */
+	@Test
+	public void testSort2() throws Exception{
+		Operation op = OperationFactory.createOperation("opSortAsc");
+		
+		List<String> expectedList = new ArrayList<String>();
+
+		expectedList.add("1");
+		expectedList.add("1.2");
+		expectedList.add("1.22");
+		expectedList.add("2.2");
+		expectedList.add("2.2");
+		expectedList.add("7");
+		expectedList.add("8");
+		expectedList.add("9");
+		expectedList.add("111");
+		expectedList.add("Apple");
+		expectedList.add("Barnes");
+		expectedList.add("employee(Melvin,Barnes,11000.12)");
+		expectedList.add("Blue");
+		expectedList.add("Cardamon");
+		expectedList.add("employee(Jordan,Greenberg,22000.12)");
+		expectedList.add("employee(Fatima,Smith,22000.11)");
+		expectedList.add("Watermelon");
+		expectedList.add("employee(Ethan,Zweig,22000.11)");
+		
+		// Generates a string representation of the sorted list
+		StringBuilder strBuild = new StringBuilder("");
+		for (String s : expectedList) {
+			strBuild.append("\"");
+			strBuild.append(StringEscapeUtils.escapeJava(s));
+			strBuild.append("\" ");
+		}
+		String expected = strBuild.toString();
+		
+		
+		ArrayList<String> argList = new ArrayList<String>();
+
+		argList.add("111");
+		argList.add("9");
+		argList.add("Apple");
+		argList.add("Blue");
+		argList.add("employee(Ethan,Zweig,22000.11)");
+		argList.add("employee(Fatima,Smith,22000.11)");
+		argList.add("8");
+		argList.add("7");
+		argList.add("1.22");
+		argList.add("employee(Melvin,Barnes,11000.12)");
+		argList.add("1.2");
+		argList.add("1");
+		argList.add("2.2");
+		argList.add("2.2");
+		argList.add("employee(Jordan,Greenberg,22000.12)");
+		argList.add("Barnes");
+		argList.add("Cardamon");
+		argList.add("Watermelon");
+		
+		String received = op.getResult(argList);
+		
+		assertEquals(expected, received);
+	}
 	
 	/**
 	 * Tests Sort Operation: only numbers

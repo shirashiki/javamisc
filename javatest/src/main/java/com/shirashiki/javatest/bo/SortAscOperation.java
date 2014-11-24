@@ -93,13 +93,14 @@ public class SortAscOperation implements Operation {
 		i = 0;
 		j = 0;
 		// Adds now the elements of type string and Employee
-		// Merges list containing ints and doubles
 		while (i < strList.size() && j < empList.size()) {
+			String strTemp1 = strList.get(i);
+			String strTemp2 = empList.get(j).getLastName();
 			
-			if ( strList.get(i).compareTo(empList.get(j).getLastName()) == -1 ) {
+			if ( strTemp1.compareTo(strTemp2) < 0 ) {
 				finalList.add(strList.get(i));
 				i++;
-			} else if (strList.get(i).compareTo(empList.get(j).getLastName()) == 1) {
+			} else if (strTemp1.compareTo(strTemp2) > 0) {
 				finalList.add(empList.get(j).toCSV());
 				j++;
 			} else {
