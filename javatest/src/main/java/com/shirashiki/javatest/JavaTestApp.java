@@ -3,8 +3,8 @@ package com.shirashiki.javatest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.shirashiki.javatest.bo.*;
+import com.shirashiki.javatest.bo.Operation;
+import com.shirashiki.javatest.bo.OperationFactory;
 
 /**
  * 
@@ -22,6 +22,14 @@ import com.shirashiki.javatest.bo.*;
  * that is a string or numeric. Ignores employee arguments. - opSortAsc: sort
  * numbers and strings in ascending order. If an employee is encountered, use
  * its lastName.
+ * 
+ * Examples of how to use it:
+ * 
+ * java -cp package.jar com.shirashiki.javatest.JavaTestApp opAdd 1 2 3
+ * java -cp package.jar com.shirashiki.javatest.JavaTestApp opConcatenate
+ * banana apple 1 2 3 employee(John,Smith,33000)
+ * java -cp package.jar com.shirashiki.javatest.JavaTestApp opSortAsc 
+ * 99 11 1 9
  *
  * @author Silvio Hirashiki - silvio.hirashiki@gmail.com
  */
@@ -34,7 +42,7 @@ public class JavaTestApp {
 	public static void main(String[] args) {
 		// cannot have empty argument
 		if (args.length < 1) {
-			throw new IllegalArgumentException("empty argument");
+			throw new IllegalArgumentException("Empty argument, need to inform operation and ars, example: JavaTestApp opAdd 3 2 1");
 		}
 
 		List<String> argList = new ArrayList<String>(Arrays.asList(args));

@@ -103,9 +103,6 @@ public class Employee {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (Double.doubleToLongBits(salary) != Double
-				.doubleToLongBits(other.salary))
-			return false;
 		
 		return true;
 	}

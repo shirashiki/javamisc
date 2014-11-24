@@ -8,8 +8,9 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.shirashiki.javatest.model.*;
 
 /**
- * Sort numbers and strings in ascending order. If an employee is encountered, 
+ * Sort numbers and strings in ascending order. If an employee is encountered,
  * use its lastName.
+ * 
  * @author silvio hirashiki
  *
  */
@@ -21,7 +22,7 @@ public class SortAscOperation implements Operation {
 	public String getResult(List<String> argList) {
 
 		List<String> sortedList = getSortedAsc(argList);
-		
+
 		// Generates a string representation of the sorted list
 		StringBuilder strBuild = new StringBuilder("");
 		for (String currentString : sortedList) {
@@ -34,10 +35,11 @@ public class SortAscOperation implements Operation {
 		return strBuild.toString();
 	}
 
-	
 	/**
 	 * Sorts List in ascending order
-	 * @param argList List to be sorted
+	 * 
+	 * @param argList
+	 *            List to be sorted
 	 * @return Sorted List
 	 */
 	public List<String> getSortedAsc(List<String> argList) {
@@ -47,7 +49,10 @@ public class SortAscOperation implements Operation {
 		List<String> strList = new ArrayList<String>();
 		List<Employee> empList = new ArrayList<Employee>();
 
-		// fills each list according to type
+		/*
+		 * Separates the list of strings in lists with more specific types, so
+		 * we can sort and process
+		 */
 		for (String s : argList) {
 
 			// when numeric, adds elements in the double or int list
@@ -67,33 +72,51 @@ public class SortAscOperation implements Operation {
 
 		}
 
+		List<String> strResultList;
+		
+		// merges the numeric lists
+		strResultList = mergeNumericLists(intList, doubList);
+		
+		// merges the list of strings and employees and appends
+		strResultList.addAll(mergeStringBasedLists(strList, empList));
+		
+		return strResultList;
+		
+	}
+
+	/**
+	 * Merges numeric lists into a list of strings
+	 * 
+	 * @param intList
+	 *            numeric list of integer values
+	 * @param doubList
+	 *            numeric list of double values
+	 * @return merged list
+	 */
+	private List<String> mergeNumericLists(List<Integer> intList,
+			List<Double> doubList) {
+
 		// Sorts each collection
 		Collections.sort(intList);
 		Collections.sort(doubList);
-		Collections.sort(strList);
-		Collections.sort(empList, Employee.LastNameComparator);
 
-		/*
-		 * Merge 2 sorted arrays
-		 */
-		// http://stackoverflow.com/questions/5958169/how-to-merge-two-sorted-arrays-into-a-sorted-array
-
+		// merges sorted arrays
 		int i = 0;
 		int j = 0;
 
-		List<String> finalList = new ArrayList<String>();
+		List<String> strResList = new ArrayList<String>();
 
 		// Merges list containing ints and doubles
 		while (i < intList.size() && j < doubList.size()) {
 			if (intList.get(i) < doubList.get(j)) {
-				finalList.add(Integer.toString(intList.get(i)));
+				strResList.add(Integer.toString(intList.get(i)));
 				i++;
 			} else if (intList.get(i) > doubList.get(j)) {
-				finalList.add(Double.toString(doubList.get(j)));
+				strResList.add(Double.toString(doubList.get(j)));
 				j++;
 			} else {
-				finalList.add(Integer.toString(intList.get(i)));
-				finalList.add(Double.toString(doubList.get(j)));
+				strResList.add(Integer.toString(intList.get(i)));
+				strResList.add(Double.toString(doubList.get(j)));
 				i++;
 				j++;
 			}
@@ -102,35 +125,52 @@ public class SortAscOperation implements Operation {
 		// transport remaining items
 		if (i < intList.size()) {
 			while (i < intList.size()) {
-				finalList.add(Integer.toString(intList.get(i)));
+				strResList.add(Integer.toString(intList.get(i)));
 				i++;
 			}
 		}
 
 		if (j < doubList.size()) {
 			while (j < doubList.size()) {
-				finalList.add(Double.toString(doubList.get(j)));
+				strResList.add(Double.toString(doubList.get(j)));
 				j++;
 			}
 		}
 
-
-		i = 0;
-		j = 0;
+		return strResList;
+	}
+	
+	
+	/**
+	 * Merges lists which can be compared in a string comparation
+	 * @param strList
+	 * @param empList
+	 * @return
+	 */
+	private List<String> mergeStringBasedLists(List<String> strList, List<Employee>empList) {
+		
+		Collections.sort(strList);
+		Collections.sort(empList, Employee.LastNameComparator);
+		
+		int i = 0;
+		int j = 0;
+		
+		List<String> strResList = new ArrayList<String>();
+		
 		// Adds now the elements of type string and Employee
 		while (i < strList.size() && j < empList.size()) {
 			String strTemp1 = strList.get(i);
 			String strTemp2 = empList.get(j).getLastName();
-			
-			if ( strTemp1.compareTo(strTemp2) < 0 ) {
-				finalList.add(strList.get(i));
+
+			if (strTemp1.compareTo(strTemp2) < 0) {
+				strResList.add(strList.get(i));
 				i++;
 			} else if (strTemp1.compareTo(strTemp2) > 0) {
-				finalList.add(employeeAsCSV(empList.get(j)));
+				strResList.add(employeeAsCSV(empList.get(j)));
 				j++;
 			} else {
-				finalList.add(strList.get(i));
-				finalList.add(employeeAsCSV(empList.get(j)));
+				strResList.add(strList.get(i));
+				strResList.add(employeeAsCSV(empList.get(j)));
 				i++;
 				j++;
 			}
@@ -139,38 +179,46 @@ public class SortAscOperation implements Operation {
 		// transport remaining items
 		if (i < strList.size()) {
 			while (i < strList.size()) {
-				finalList.add(strList.get(i));
+				strResList.add(strList.get(i));
 				i++;
 			}
 		}
 
 		if (j < empList.size()) {
 			while (j < empList.size()) {
-				finalList.add(employeeAsCSV(empList.get(j)));
+				strResList.add(employeeAsCSV(empList.get(j)));
 				j++;
 			}
 		}
 		
-		return finalList;
+		return strResList;
 	}
+
 	
 	/**
-	 * Generates a string similar to the one used to create the employee. Example:
-	 * employee(John,Smith,33000.00)
-	 * @return
+	 * Generates a string similar to the one used to create the employee.
+	 * Example: employee(John,Smith,33000.00)
+	 * @param emp	an employee object
+	 * @return a string to generate an employee
 	 */
-	public String employeeAsCSV(Employee emp) {
-		
+	private String employeeAsCSV(Employee emp) {
+
 		StringBuilder strOut = new StringBuilder("");
 		strOut.append("employee(");
 		strOut.append(emp.getFirstName() + ",");
 		strOut.append(emp.getLastName() + ",");
 		strOut.append(Double.toString(emp.getSalary()));
 		strOut.append(")");
-		
+
 		return strOut.toString();
 	}
-	
+
+	/**
+	 * Creates an employee with a string parameter in the format
+	 * employee(John,Doe,2200)
+	 * @param employeeString
+	 * @return an Employee
+	 */
 	private Employee createEmployee(String employeeString) {
 		String csvString = employeeString;
 		csvString = csvString.replace("employee(", "");

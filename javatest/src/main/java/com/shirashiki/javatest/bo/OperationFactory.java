@@ -2,7 +2,7 @@ package com.shirashiki.javatest.bo;
 
 /**
  * Factory to create supported operations
- * @author silviohirashiki
+ * @author silvio hirashiki
  *
  */
 public class OperationFactory {
@@ -14,22 +14,17 @@ public class OperationFactory {
 	 */
 	public static Operation createOperation(String operationName) {
 		
-		Operation myOperation;
-		
 		if (operationName.equalsIgnoreCase("opAdd")) {
-			myOperation = new AddOperation();
-			return myOperation;
+			return new AddOperation();
 		} 
 		else if (operationName.equalsIgnoreCase("opConcatenate")) {
-			myOperation = new ConcatenateOperation();
-			return myOperation;
+			return new ConcatenateOperation();
 		}
 		else if (operationName.equalsIgnoreCase("opSortAsc")) {
-			myOperation = new SortAscOperation();
-			return myOperation;
+			return new SortAscOperation();
 		} 
 		else {
-			throw new IllegalArgumentException("Operation " + operationName + " not supported");
+			throw new IllegalArgumentException("Operation " + operationName + " not supported. Supported operations: opAdd, opConcatenate, opSortAsc");
 		}
 
 		

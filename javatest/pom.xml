@@ -19,7 +19,11 @@
 
 	<build>
 		<plugins>
-			<!-- this configuration enables the generation of fat jars, containing all dependencies -->
+			<!-- this configuration enables the generation of fat jars, containing all dependencies
+				To generate a jar containing all dependencies, run:
+				mvn clean compile assembly:single
+				mvn install
+			 -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
