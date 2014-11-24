@@ -126,11 +126,11 @@ public class SortAscOperation implements Operation {
 				finalList.add(strList.get(i));
 				i++;
 			} else if (strTemp1.compareTo(strTemp2) > 0) {
-				finalList.add(empList.get(j).toCSV());
+				finalList.add(employeeAsCSV(empList.get(j)));
 				j++;
 			} else {
 				finalList.add(strList.get(i));
-				finalList.add(empList.get(j).toCSV());
+				finalList.add(employeeAsCSV(empList.get(j)));
 				i++;
 				j++;
 			}
@@ -146,12 +146,29 @@ public class SortAscOperation implements Operation {
 
 		if (j < empList.size()) {
 			while (j < empList.size()) {
-				finalList.add(empList.get(j).toCSV());
+				finalList.add(employeeAsCSV(empList.get(j)));
 				j++;
 			}
 		}
 		
 		return finalList;
+	}
+	
+	/**
+	 * Generates a string similar to the one used to create the employee. Example:
+	 * employee(John,Smith,33000.00)
+	 * @return
+	 */
+	public String employeeAsCSV(Employee emp) {
+		
+		StringBuilder strOut = new StringBuilder("");
+		strOut.append("employee(");
+		strOut.append(emp.getFirstName() + ",");
+		strOut.append(emp.getLastName() + ",");
+		strOut.append(Double.toString(emp.getSalary()));
+		strOut.append(")");
+		
+		return strOut.toString();
 	}
 	
 	private Employee createEmployee(String employeeString) {

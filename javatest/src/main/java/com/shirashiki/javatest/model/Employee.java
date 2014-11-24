@@ -39,22 +39,6 @@ public class Employee {
 
 	};
 	
-	/**
-	 * Generates a string similar to the one used to create the employee. Example:
-	 * employee(John,Smith,33000.00)
-	 * @return
-	 */
-	public String toCSV() {
-		
-		StringBuilder strOut = new StringBuilder("");
-		strOut.append("employee(");
-		strOut.append(firstName + ",");
-		strOut.append(lastName + ",");
-		strOut.append(Double.toString(salary));
-		strOut.append(")");
-		
-		return strOut.toString();
-	}
 
 	public String getFirstName() {
 		return firstName;
