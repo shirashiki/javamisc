@@ -8,15 +8,39 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.shirashiki.javatest.model.*;
 
 /**
- * 
+ * Sort numbers and strings in ascending order. If an employee is encountered, 
+ * use its lastName.
  * @author silvio hirashiki
  *
  */
 public class SortAscOperation implements Operation {
 
+	/**
+	 * Returns Sort Operation result as a string
+	 */
 	public String getResult(List<String> argList) {
 
-		// ### consider refactoring
+		List<String> sortedList = getSortedAsc(argList);
+		
+		// Generates a string representation of the sorted list
+		StringBuilder strBuild = new StringBuilder("");
+		for (String currentString : sortedList) {
+
+			strBuild.append("\"");
+			strBuild.append(StringEscapeUtils.escapeJava(currentString));
+			strBuild.append("\" ");
+		}
+
+		return strBuild.toString();
+	}
+
+	/**
+	 * Sorts List in ascending order
+	 * @param argList List to be sorted
+	 * @return Sorted List
+	 */
+	public List<String> getSortedAsc(List<String> argList) {
+
 		List<Integer> intList = new ArrayList<Integer>();
 		List<Double> doubList = new ArrayList<Double>();
 		List<String> strList = new ArrayList<String>();
@@ -126,17 +150,7 @@ public class SortAscOperation implements Operation {
 			}
 		}
 		
+		return finalList;
 		
-		// Generates a string representation of the sorted list
-		StringBuilder strBuild = new StringBuilder("");
-		for (String s : finalList) {
-
-			strBuild.append("\"");
-			strBuild.append(StringEscapeUtils.escapeJava(s));
-			strBuild.append("\" ");
-		}
-
-		return strBuild.toString();
 	}
-
 }

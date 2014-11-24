@@ -1,6 +1,8 @@
 package com.shirashiki.javatest.bo;
 
+import java.math.BigDecimal;
 import java.util.*;
+
 import org.apache.commons.lang3.math.NumberUtils;
 
 /**
@@ -14,13 +16,13 @@ public class AddOperation implements Operation {
 
 	public String getResult(List<String> argList) {
 		
-		double result = 0d;
+		BigDecimal result = new BigDecimal(0);
 	
 	    for (String s : argList) {
 	    	
 	    	// when element is numeric, accumulates values
 	        if (NumberUtils.isNumber(s)) {
-	        	result = result + Double.parseDouble(s);
+	        	result = result.add(new BigDecimal(s));
 	        }
 	    }
 				
