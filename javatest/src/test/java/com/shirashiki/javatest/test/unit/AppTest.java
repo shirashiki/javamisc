@@ -1,10 +1,14 @@
 package com.shirashiki.javatest.test.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
 import java.util.*;
+
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.junit.Test;
+
 import com.shirashiki.javatest.bo.*;
 import com.shirashiki.javatest.model.Employee;
 
@@ -36,7 +40,7 @@ public class AppTest {
 
 		String received = op.getResult(argList);
 		
-		assertEquals(expected, received);
+		assertTrue(new BigDecimal(expected).equals(new BigDecimal(received)));
 		
 	}
 	/**
@@ -55,7 +59,7 @@ public class AppTest {
 
 		String received = op.getResult(argList);
 		
-		assertEquals(expected, received);
+		assertTrue(new BigDecimal(expected).equals(new BigDecimal(received)));
 		
 	}
 	
@@ -66,7 +70,7 @@ public class AppTest {
 	@Test
 	public void testAddOperationNonNumbers() throws Exception{
 		Operation op = OperationFactory.createOperation("opAdd");
-		String expected = "0.0";
+		String expected = "0";
 		
 		ArrayList<String> argList = new ArrayList<String>();
 		argList.add("Banana");
@@ -75,7 +79,7 @@ public class AppTest {
 
 		String received = op.getResult(argList);
 		
-		assertEquals(expected, received);
+		assertTrue(new BigDecimal(expected).equals(new BigDecimal(received)));
 		
 	}
 	
@@ -353,32 +357,5 @@ public class AppTest {
 		assertEquals(expected, received);
 	}
 	
-	
-	
-	/**
-	 * Tests employee creation
-	 * @throws Exception
-	 */
-	@Test
-	public void testcreateEmployee() throws Exception{
-
-		String empString = "employee(John,Smith,33000.0)"; 
-		Employee emp = new Employee(empString);
-		
-		assertEquals("John", emp.getFirstName());
-		assertEquals("Smith", emp.getLastName());
-		assertEquals(33000.0, emp.getSalary(),0.0);
-		assertEquals(empString, emp.toCSV());
-		
-		
-		empString = "employee(,,123.456)";
-		emp = new Employee("employee(,,123.456)");
-		
-		assertEquals("", emp.getFirstName());
-		assertEquals("", emp.getLastName());
-		assertEquals(123.456, emp.getSalary(),0.0);
-		assertEquals(empString, emp.toCSV());
-		
-	}
 	
 }

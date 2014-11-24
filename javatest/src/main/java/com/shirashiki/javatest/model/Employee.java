@@ -2,12 +2,10 @@ package com.shirashiki.javatest.model;
 
 import java.util.*;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 /**
  * Class that represents an Employee
  * 
- * @author silviohirashiki
+ * @author silvio hirashiki
  *
  */
 public class Employee {
@@ -17,45 +15,19 @@ public class Employee {
 
 	public Employee() {
 	}
-
+	
 	/**
-	 * 
-	 * @param csvString
-	 *            Comma separated value string containing first name, last name
-	 *            and salary, in the format: employee(John,Smith,33000)
+	 * Creates an Employee
+	 * @param firstName
+	 * @param lastName
+	 * @param salary
 	 */
-	public Employee(String employeeString) {
-
-		String csvString = employeeString;
-		csvString = csvString.replace("employee(", "");
-		csvString = csvString.substring(0, csvString.length() - 1);
-
-		List<String> empInfo = Arrays.asList(csvString.split("\\s*,\\s*"));
-
-		if (empInfo.size() < 3) {
-			throw new IllegalArgumentException(
-					"employee needs to have firtname, lastname and salary. received:"
-							+ employeeString);
-		}
-
-		String firstName = empInfo.get(0).trim();
-		String lastName = empInfo.get(1).trim();
-
-		double salary;
-
-		if (NumberUtils.isNumber(empInfo.get(2).trim())) {
-			salary = Double.parseDouble(empInfo.get(2).trim());
-		} else {
-			throw new IllegalArgumentException("employee salary not numeric:"
-					+ empInfo.get(2));
-		}
-
+	public Employee(String firstName, String lastName, double salary) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.salary = salary;
-
 	}
-
+	
 	/**
 	 * Comparator to sort employees by last name, ascending
 	 */
@@ -154,9 +126,5 @@ public class Employee {
 		return true;
 	}
 
-	/*
-	 * public int compareTo(Employee emp) { return
-	 * lastName.compareTo(emp.getLastName()); }
-	 */
 
 }

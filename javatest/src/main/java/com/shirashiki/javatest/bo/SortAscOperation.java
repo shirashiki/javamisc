@@ -34,6 +34,7 @@ public class SortAscOperation implements Operation {
 		return strBuild.toString();
 	}
 
+	
 	/**
 	 * Sorts List in ascending order
 	 * @param argList List to be sorted
@@ -58,7 +59,7 @@ public class SortAscOperation implements Operation {
 				}
 			} else {
 				if (s.toLowerCase().contains("employee(")) {
-					empList.add(new Employee(s));
+					empList.add(createEmployee(s));
 				} else {
 					strList.add(s);
 				}
@@ -151,6 +152,33 @@ public class SortAscOperation implements Operation {
 		}
 		
 		return finalList;
-		
+	}
+	
+	private Employee createEmployee(String employeeString) {
+		String csvString = employeeString;
+		csvString = csvString.replace("employee(", "");
+		csvString = csvString.substring(0, csvString.length() - 1);
+
+		List<String> empInfo = Arrays.asList(csvString.split("\\s*,\\s*"));
+
+		if (empInfo.size() < 3) {
+			throw new IllegalArgumentException(
+					"employee needs to have firstname, lastname and salary. received:"
+							+ employeeString);
+		}
+
+		String firstName = empInfo.get(0).trim();
+		String lastName = empInfo.get(1).trim();
+
+		double salary;
+
+		if (NumberUtils.isNumber(empInfo.get(2).trim())) {
+			salary = Double.parseDouble(empInfo.get(2).trim());
+		} else {
+			throw new IllegalArgumentException("employee salary not numeric:"
+					+ empInfo.get(2));
+		}
+
+		return new Employee(firstName, lastName, salary);
 	}
 }
