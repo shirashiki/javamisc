@@ -13,7 +13,7 @@ import org.apache.commons.lang3.math.NumberUtils;
  * @author silviohirashiki
  *
  */
-public class AddOperation implements Operation {
+public class AddOperation implements ConsoleOperation {
 
 	public String getResult(List<String> argList) {
 

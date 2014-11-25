@@ -3,7 +3,8 @@ package com.shirashiki.javatest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import com.shirashiki.javatest.bo.Operation;
+
+import com.shirashiki.javatest.bo.ConsoleOperation;
 import com.shirashiki.javatest.bo.OperationFactory;
 
 /**
@@ -52,7 +53,7 @@ public class JavaTestApp {
 		argList.remove(0);
 
 		// Creates the object which will perform the operation
-		Operation op = OperationFactory.createOperation(operationName);
+		ConsoleOperation op = OperationFactory.createOperation(operationName);
 
 		// Executes the operation and prints result in the console
 		String opResult = "";

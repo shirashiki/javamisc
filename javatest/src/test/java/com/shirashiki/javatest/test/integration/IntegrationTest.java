@@ -4,11 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.*;
 import java.util.ArrayList;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import com.shirashiki.javatest.JavaTestApp;
 
 
@@ -35,6 +33,10 @@ public class IntegrationTest {
 		System.setOut(console);
 	}
 
+	/**
+	 * Tests Add
+	 * @throws Exception
+	 */
 	@Test
 	public void testAddOperation() throws Exception {
 
@@ -42,5 +44,43 @@ public class IntegrationTest {
 		assertEquals("3.1" + EOL, bytes.toString());
 	}
 	
+	/**
+	 * Tests concatenate
+	 * @throws Exception
+	 */
+	@Test
+	public void testConcatenateOperation() throws Exception {
+		JavaTestApp.main(new String[] { "opConcatenate", "a", "2","chocolate","employee(John,Smith,33000)"});
+		assertEquals("a2chocolate" + EOL, bytes.toString());
+	}
 	
+	/**
+	 * Tests Sort
+	 * @throws Exception
+	 */
+	@Test
+	public void testSortOperation() throws Exception {
+		JavaTestApp.main(new String[] { "opSortAsc", "1.1", "2","chocolate","employee(John,Smith,33000)"});
+		assertEquals("\"1.1\" \"2\" \"employee(John,Smith,33000.0)\" \"chocolate\" " + EOL, bytes.toString());
+	}
+	
+	/**
+	 * Tests empty arg test
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testEmptyArg() throws Exception {
+
+		JavaTestApp.main(new String[] {""});
+	}
+	
+	/**
+	 * Test bad args
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testBadArgs() throws Exception {
+
+		JavaTestApp.main(new String[] { "IloveApples", "1.1", "2","chocolate","employee(John,Smith,33000)"});
+	}
 }

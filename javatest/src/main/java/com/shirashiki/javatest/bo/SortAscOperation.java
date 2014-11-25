@@ -4,8 +4,8 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import com.shirashiki.javatest.model.Employee;
 
-import com.shirashiki.javatest.model.*;
 
 /**
  * Sort numbers and strings in ascending order. If an employee is encountered,
@@ -14,7 +14,7 @@ import com.shirashiki.javatest.model.*;
  * @author silvio hirashiki
  *
  */
-public class SortAscOperation implements Operation {
+public class SortAscOperation implements ConsoleOperation {
 
 	/**
 	 * Returns Sort Operation result as a string
