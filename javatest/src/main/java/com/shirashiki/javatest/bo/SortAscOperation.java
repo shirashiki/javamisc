@@ -14,7 +14,7 @@ import com.shirashiki.javatest.model.Employee;
  * @author silvio hirashiki
  *
  */
-public class SortAscOperation implements ConsoleOperation {
+public class SortAscOperation implements Operation {
 
 	/**
 	 * Returns Sort Operation result as a string

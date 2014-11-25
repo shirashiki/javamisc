@@ -8,7 +8,7 @@ import java.util.List;
  * @author silviohirashiki
  *
  */
-public interface ConsoleOperation {
+public interface Operation {
 
 	public String getResult(List<String> argList);
 }

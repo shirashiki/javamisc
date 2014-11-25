@@ -12,7 +12,7 @@ public class OperationFactory {
 	 * @param operationName
 	 * @return The desired operation
 	 */
-	public static ConsoleOperation createOperation(String operationName) {
+	public static Operation createOperation(String operationName) {
 		
 		if (operationName.equalsIgnoreCase("opAdd")) {
 			return new AddOperation();

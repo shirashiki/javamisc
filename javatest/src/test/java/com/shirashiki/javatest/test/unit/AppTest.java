@@ -21,7 +21,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testAddOperation() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opAdd");
+		Operation op = OperationFactory.createOperation("opAdd");
 		String expected = "15.12";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -44,7 +44,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testAddOperationOnlyNumbers() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opAdd");
+		Operation op = OperationFactory.createOperation("opAdd");
 		String expected = "45.12001";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -64,7 +64,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testAddOperationNonNumbers() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opAdd");
+		Operation op = OperationFactory.createOperation("opAdd");
 		String expected = "0";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -84,7 +84,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testConcatenateOperation() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opConcatenate");
+		Operation op = OperationFactory.createOperation("opConcatenate");
 		String expected = "chocolate0.1132.02bananaapple";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -108,7 +108,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testConcatenateOperationOnlyNumbers() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opConcatenate");
+		Operation op = OperationFactory.createOperation("opConcatenate");
 		String expected = "123";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -127,7 +127,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testSort() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opSortAsc");
+		Operation op = OperationFactory.createOperation("opSortAsc");
 		
 		List<String> expectedList = new ArrayList<String>();
 
@@ -186,7 +186,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testSort2() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opSortAsc");
+		Operation op = OperationFactory.createOperation("opSortAsc");
 		
 		List<String> expectedList = new ArrayList<String>();
 
@@ -251,7 +251,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testSortOnlyNumbers() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opSortAsc");
+		Operation op = OperationFactory.createOperation("opSortAsc");
 		String expected = "\"1\" \"1.12\" \"2.1\" \"2.13\" \"3\" \"7\" \"11\" \"20\" ";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -275,7 +275,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testSortInt() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opSortAsc");
+		Operation op = OperationFactory.createOperation("opSortAsc");
 		String expected = "\"1\" \"2\" \"2\" \"4\" \"7\" \"13\" ";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -305,7 +305,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testSortDouble() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opSortAsc");
+		Operation op = OperationFactory.createOperation("opSortAsc");
 		String expected = "\"1.12\" \"1.13\" \"2.1\" \"2.1\" \"2.12\" \"13.2\" ";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -335,7 +335,7 @@ public class AppTest {
 	 */
 	@Test
 	public void testSortWithoutEmployee() throws Exception{
-		ConsoleOperation op = OperationFactory.createOperation("opSortAsc");
+		Operation op = OperationFactory.createOperation("opSortAsc");
 		String expected = "\"1\" \"2\" \"3\" \"11\" \"a\" \"b\" \"z\" ";
 		
 		ArrayList<String> argList = new ArrayList<String>();
@@ -358,7 +358,7 @@ public class AppTest {
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testOperationFactoryinvalidOp() throws Exception {
-		ConsoleOperation cop = OperationFactory.createOperation("aa");
+		Operation cop = OperationFactory.createOperation("aa");
 	}
 	
 	/**
@@ -367,19 +367,19 @@ public class AppTest {
 	 */
 	@Test
 	public void testOperationFactory() throws Exception {
-		ConsoleOperation cop;
+		Operation cop;
 		
 		cop = OperationFactory.createOperation("opAdd");
 		assertTrue(cop instanceof AddOperation);
-		assertTrue(cop instanceof ConsoleOperation);
+		assertTrue(cop instanceof Operation);
 		
 		cop = OperationFactory.createOperation("opConcatenate");
 		assertTrue(cop instanceof ConcatenateOperation);
-		assertTrue(cop instanceof ConsoleOperation);
+		assertTrue(cop instanceof Operation);
 		
 		cop = OperationFactory.createOperation("opSortAsc");
 		assertTrue(cop instanceof SortAscOperation);
-		assertTrue(cop instanceof ConsoleOperation);
+		assertTrue(cop instanceof Operation);
 		
 	}
 	

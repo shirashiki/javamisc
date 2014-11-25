@@ -9,7 +9,7 @@ import java.util.List;
  * @author silvio hirashiki
  *
  */
-public class ConcatenateOperation implements ConsoleOperation {
+public class ConcatenateOperation implements Operation {
 
 	public String getResult(List<String> argList) {
 
